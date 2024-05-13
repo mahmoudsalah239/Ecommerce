@@ -1,0 +1,94 @@
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Sign up</h2>
+                <div *ngIf="ApiErrorMsg" class="alert alert-danger">
+                    {{ApiErrorMsg}}
+                </div>
+                <form [formGroup]="RegisterForm" (ngSubmit)="handleRegister(RegisterForm)" class="register-form"
+                    id="register-form">
+                    <div class="form-group">
+                        <label for="name"><i class="fa-solid fa-user"></i></label>
+                        <input formControlName="name" type="text" id="name" placeholder="Your Name" />
+                        <div *ngIf="RegisterForm.get('name')?.errors&& RegisterForm.get('name')?.touched"
+                            class="text-danger">
+                            <small *ngIf="RegisterForm.get('name')?.getError('required')">Name is Required</small>
+                            <small *ngIf="RegisterForm.get('name')?.getError('minlength')">min length is 5 char </small>
+                            <small *ngIf="RegisterForm.get('name')?.getError('maxlength')">Max length is 50 char
+                            </small>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i></label>
+                        <input type="email" formControlName="email" id="email" placeholder="Your Email" />
+                        <div *ngIf="RegisterForm.get('email')?.errors&& RegisterForm.get('email')?.touched"
+                            class="text-danger">
+                            <small *ngIf="RegisterForm.get('email')?.getError('required')">Email is Required</small>
+                            <small *ngIf="RegisterForm.get('email')?.getError('email')"> Inavlid Email </small>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fa-solid fa-lock"></i></label>
+                        <input type="password" formControlName="password" id="pass" placeholder="Password" />
+                        <div *ngIf="RegisterForm.get('password')?.errors&& RegisterForm.get('password')?.touched"
+                            class="text-danger">
+                            <small *ngIf="RegisterForm.get('password')?.getError('required')">password is
+                                Required</small>
+                            <small *ngIf="RegisterForm.get('password')?.getError('pattern')">not match the pattern
+                            </small>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rePassword"><i class="fa-solid fa-lock"></i></label>
+                        <input type="password" formControlName="rePassword" id="rePassword"
+                            placeholder="Repeat your password" />
+                        <div *ngIf="RegisterForm.get('rePassword')?.errors&& RegisterForm.get('rePassword')?.touched"
+                            class="text-danger">
+                            <small *ngIf="RegisterForm.get('rePassword')?.getError('required')">repassword is
+                                Required</small>
+                            <small *ngIf="RegisterForm.get('rePassword')?.getError('pattern')">not match the pattern
+                            </small>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone"><i class="fa-solid fa-phone"></i></label>
+                        <input type="tel" formControlName="phone" id="phone" placeholder="Enter your Phone" />
+                        <div *ngIf="RegisterForm.get('phone')?.errors&& RegisterForm.get('phone')?.touched"
+                            class="text-danger">
+                            <small *ngIf="RegisterForm.get('phone')?.getError('required')">phone is
+                                Required</small>
+                            <small *ngIf="RegisterForm.get('phone')?.getError('pattern')">only Egyption numbers
+                            </small>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
+                            statements in <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group form-button">
+
+                        <button type="submit" [disabled]="RegisterForm.invalid"  class="form-submit border-0"> Register <i *ngIf="isloaded"
+                                class="fas fs-5 fa-spinner fa-spin"></i></button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="signup-image">
+                <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
+                <a routerLink="/Login" class="signup-image-link">I am already member</a>
+            </div>
+        </div>
+    </div>
+</section>
